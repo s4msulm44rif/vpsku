@@ -57,7 +57,7 @@ fi
 echo ""
 read -p "$( echo -e "Press ${GRAY}[ ${NC}${green}Enter${NC} ${GRAY}]${NC} For Starting Installation") "
 echo ""
-clear
+
 if [ "${EUID}" -ne 0 ]; then
 		echo "You need to run this script as root"
 		exit 1
@@ -66,19 +66,17 @@ if [ "$(systemd-detect-virt)" == "openvz" ]; then
 		echo "OpenVZ is not supported"
 		exit 1
 fi
+
 red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
 #IZIN SCRIPT
 MYIP=$(curl -sS ipv4.icanhazip.com)
 echo -e "\e[32mloading...\e[0m"
-clear
+
 #IZIN SCRIPT
 MYIP=$(curl -sS ipv4.icanhazip.com)
-echo -e "\e[32mloading...\e[0m" 
-clear
-# Version sc
-clear
+
 #########################
 # USERNAME
 rm -f /usr/bin/user
@@ -90,7 +88,7 @@ echo "$expx" >/usr/bin/e
 username=$(cat /usr/bin/user)
 oid=$(cat /usr/bin/ver)
 exp=$(cat /usr/bin/e)
-clear
+
 # CERTIFICATE STATUS
 d1=$(date -d "$valid" +%s)
 d2=$(date -d "$today" +%s)
@@ -114,10 +112,9 @@ sts="${Info}"
 else
 sts="${Error}"
 fi
-echo -e "\e[32mloading...\e[0m"
-clear
+
 # REPO    
-    REPO="https://raw.githubusercontent.com/imam022/vip/main/"
+REPO="https://raw.githubusercontent.com/imam022/vip/main/"
 
 ####
 start=$(date +%s)
@@ -215,7 +212,7 @@ fi
 }
 
 # GEO PROJECT
-clear
+
 function nginx_install() {
     # // Checking System
     if [[ $(cat /etc/os-release | grep -w ID | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/ID//g') == "ubuntu" ]]; then
@@ -233,7 +230,6 @@ function nginx_install() {
 
 # Update and remove packages
 function base_package() {
-    clear
     ########
     print_install "Menginstall Packet Yang Dibutuhkan"
     apt install zip pwgen openssl netcat socat cron bash-completion -y
@@ -262,12 +258,11 @@ function base_package() {
     print_success "Packet Yang Dibutuhkan"
     
 }
-clear
+
 # Fungsi input domain
 function pasang_domain() {
 echo -e ""
-clear
-    echo -e "   .----------------------------------."
+echo -e "   .----------------------------------."
 echo -e "   |\e[1;32mPlease Select a Domain Type Below \e[0m|"
 echo -e "   '----------------------------------'"
 echo -e "     \e[1;32m1)\e[0m Domain Sendiri"
@@ -275,6 +270,7 @@ echo -e "     \e[1;32m2)\e[0m Gunakan Domain Random Khusus Digital ocean ISP LAI
 echo -e "   ------------------------------------"
 read -p "   Please select numbers 1 or 2 Any Button(Random) : " host
 echo ""
+
 if [[ $host == "1" ]]; then
 echo -e "   \e[1;32mPlease Enter Your Subdomain $NC"
 read -p "   Subdomain: " host1
@@ -286,20 +282,14 @@ elif [[ $host == "2" ]]; then
 #install cf
 wget ${REPO}limit/cf.sh && chmod +x cf.sh && ./cf.sh
 rm -f /root/cf.sh
-clear
+
 else
-print_install "Random Subdomain/Domain is Used"
-clear
-    fi
+   print_install "Random Subdomain/Domain is Used"
+fi
 }
 
-clear
-#GANTI PASSWORD DEFAULT
-
-clear
 # Pasang SSL
 function pasang_ssl() {
-clear
 print_install "Memasang SSL Pada Domain"
     rm -rf /etc/xray/xray.key
     rm -rf /etc/xray/xray.crt
@@ -359,10 +349,10 @@ rm -rf /etc/vmess/.vmess.db
     echo "& plughin Account" >>/etc/trojan/.trojan.db
     echo "& plughin Account" >>/etc/shadowsocks/.shadowsocks.db
     echo "& plughin Account" >>/etc/ssh/.ssh.db
-    }
+}
+    
 #Instal Xray
 function install_xray() {
-clear
     print_install "Core Xray 1.8.1 Latest Version"
     # install xray
     #echo -e "[ ${green}INFO$NC ] Downloading & Installing xray core"
@@ -383,7 +373,6 @@ bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release
     print_success "Core Xray 1.8.1 Latest Version"
     
     # Settings UP Nginix Server
-    clear
     curl -s ipinfo.io/city >>/etc/xray/city
     curl -s ipinfo.io/org | cut -d " " -f 2-10 >>/etc/xray/isp
     print_install "Memasang Konfigurasi Packet"
@@ -424,7 +413,6 @@ print_success "Konfigurasi Packet"
 }
 
 function ssh(){
-clear
 print_install "Memasang Password SSH"
     wget -O /etc/pam.d/common-password "${REPO}limit/password"
 chmod +x /etc/pam.d/common-password
@@ -497,7 +485,7 @@ print_success "Password SSH"
 }
 
 function udp_mini(){
-clear
+
 print_install "Memasang Service Limit Quota"
 wget raw.githubusercontent.com/imam022/vip/main/limit/limit.sh && chmod +x limit.sh && ./limit.sh
 
@@ -507,7 +495,6 @@ chmod +x /usr/bin/*
 cd /usr/bin
 sed -i 's/\r//' limit-ip
 cd
-clear
 #SERVICE LIMIT ALL IP
 cat >/etc/systemd/system/vmip.service << EOF
 [Unit]
@@ -585,7 +572,6 @@ print_success "Limit Quota Service"
 }
 
 function ssh_slow(){
-clear
 # // Installing UDP Mini
 print_install "Memasang modul SlowDNS Server"
     wget -q -O /tmp/nameserver "${REPO}limit/nameserver" >/dev/null 2>&1
@@ -594,9 +580,8 @@ print_install "Memasang modul SlowDNS Server"
  print_success "SlowDNS"
 }
 
-clear
 function ins_SSHD(){
-clear
+
 print_install "Memasang SSHD"
 wget -q -O /etc/ssh/sshd_config "${REPO}limit/sshd" >/dev/null 2>&1
 chmod 700 /etc/ssh/sshd_config
@@ -606,9 +591,7 @@ systemctl restart ssh
 print_success "SSHD"
 }
 
-clear
 function ins_dropbear(){
-clear
 print_install "Menginstall Dropbear"
 # // Installing Dropbear
 apt-get install dropbear -y > /dev/null 2>&1
@@ -619,9 +602,7 @@ chmod +x /etc/default/dropbear
 print_success "Dropbear"
 }
 
-clear
 function ins_vnstat(){
-clear
 print_install "Menginstall Vnstat"
 # setting vnstat
 apt -y install vnstat > /dev/null 2>&1
@@ -644,7 +625,6 @@ print_success "Vnstat"
 }
 
 function ins_openvpn(){
-clear
 print_install "Menginstall OpenVPN"
 #OpenVPN
 wget ${REPO}limit/openvpn &&  chmod +x openvpn && ./openvpn
@@ -653,7 +633,6 @@ print_success "OpenVPN"
 }
 
 function ins_backup(){
-clear
 print_install "Memasang Backup Server"
 #BackupOption
 apt install rclone -y
@@ -688,9 +667,7 @@ wget -q -O /etc/ipserver "${REPO}limit/ipserver" && bash /etc/ipserver
 print_success "Backup Server"
 }
 
-clear
 function ins_swab(){
-clear
 print_install "Memasang Swap 1 G"
 gotop_latest="$(curl -s https://api.github.com/repos/xxxserxxx/gotop/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
     gotop_link="https://github.com/xxxserxxx/gotop/releases/download/v$gotop_latest/gotop_v"$gotop_latest"_linux_amd64.deb"
@@ -715,7 +692,6 @@ print_success "Swap 1 G"
 }
 
 function ins_Fail2ban(){
-clear
 print_install "Menginstall Fail2ban"
 apt -y install fail2ban > /dev/null 2>&1
 sudo systemctl enable --now fail2ban
@@ -730,7 +706,6 @@ else
 	mkdir /usr/local/ddos
 fi
 
-clear
 # banner
 echo "Banner /etc/kyt.txt" >>/etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/kyt.txt"@g' /etc/default/dropbear
@@ -743,7 +718,6 @@ print_success "Fail2ban"
 ins_Fail2ban
 
 function ins_epro(){
-clear
 print_install "Menginstall ePro WebSocket Proxy"
     wget -O /usr/bin/ws "${REPO}limit/ws" >/dev/null 2>&1
     wget -O /usr/bin/tun.conf "${REPO}limit/tun.conf" >/dev/null 2>&1
@@ -784,7 +758,6 @@ print_success "ePro WebSocket Proxy"
 }
 
 function ins_restart(){
-clear
 print_install "Restarting  All Packet"
 /etc/init.d/nginx restart
 /etc/init.d/openvpn restart
@@ -818,7 +791,6 @@ print_success "All Packet"
 
 #Instal Menu
 function menu(){
-    clear
     print_install "Memasang Menu Packet"
     wget ${REPO}limit/menu.zip
     unzip menu.zip
@@ -830,7 +802,6 @@ function menu(){
 
 # Membaut Default Menu 
 function profile(){
-clear
     cat >/root/.profile <<EOF
 # ~/.profile: executed by Bourne-compatible login shells.
 if [ "$BASH" ]; then
@@ -908,7 +879,6 @@ print_success "Menu Packet"
 
 # Restart layanan after install
 function enable_services(){
-clear
 print_install "Enable Service"
     systemctl daemon-reload
     systemctl start netfilter-persistent
@@ -920,12 +890,10 @@ print_install "Enable Service"
     systemctl restart cron
     systemctl restart haproxy
     print_success "Enable Service"
-    clear
 }
 
 # Fingsi Install Script
 function instal(){
-clear
     first_setup
     nginx_install
     base_package
