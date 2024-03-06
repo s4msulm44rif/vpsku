@@ -26,7 +26,6 @@ echo -e "  Welcome To vpn Tunneling ${YELLOW}(${NC}${green} Stable Edition ${NC}
 echo -e " This Will Quick Setup VPN Server On Your Server"
 echo ""
 sleep 2
-###### IZIN SC 
 
 # // Checking Os Architecture
 if [[ $( uname -m | awk '{print $1}' ) == "x86_64" ]]; then
@@ -70,11 +69,7 @@ fi
 red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
-#IZIN SCRIPT
-MYIP=$(curl -sS ipv4.icanhazip.com)
-echo -e "\e[32mloading...\e[0m"
 
-#IZIN SCRIPT
 MYIP=$(curl -sS ipv4.icanhazip.com)
 
 #########################
@@ -196,6 +191,7 @@ function first_setup(){
     apt-get install --no-install-recommends software-properties-common
     add-apt-repository ppa:vbernat/haproxy-2.0 -y
     apt-get -y install haproxy=2.0.\*
+    
 elif [[ $(cat /etc/os-release | grep -w ID | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/ID//g') == "debian" ]]; then
     echo "Setup Dependencies For OS Is $(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g')"
     curl https://haproxy.debian.net/bernat.debian.org.gpg |
@@ -205,13 +201,12 @@ elif [[ $(cat /etc/os-release | grep -w ID | head -n1 | sed 's/=//g' | sed 's/"/
         >/etc/apt/sources.list.d/haproxy.list
     sudo apt-get update
     apt-get -y install haproxy=1.8.\*
+    
 else
     echo -e " Your OS Is Not Supported ($(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g') )"
     exit 1
 fi
 }
-
-# GEO PROJECT
 
 function nginx_install() {
     # // Checking System
