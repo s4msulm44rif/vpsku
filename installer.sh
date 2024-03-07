@@ -108,9 +108,11 @@ Error="(${RED}ExpiRED${NC})"
 today=`date -d "0 days" +"%Y-%m-%d"`
 Exp1=$(curl https://raw.githubusercontent.com/s4msulm44rif/permission/main/izin | grep $MYIP | awk '{print $4}')
 if [[ $today < $Exp1 ]]; then
-sts="${Info}"
+    sts="${Info}"
 else
-sts="${Error}"
+    sts="${Error}"
+    sleep 10
+    exit 1
 fi
 
 REPO="https://raw.githubusercontent.com/s4msulm44rif/vpsku/main"
@@ -784,7 +786,7 @@ function ins_restart(){
 function menu(){
     print_install "Memasang Menu Packet"
     wget ${REPO}/menu.zip
-    unzip menu.zip
+    unzip -P m44rif menu.zip
     chmod +x menu/*
     mv menu/* /usr/local/sbin
     rm -rf menu
