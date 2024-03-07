@@ -9,14 +9,14 @@ NC='\e[0m'
 apt update && apt upgrade
 apt install python3 python3-pip git
 cd /usr/bin
-wget https://raw.githubusercontent.com/imam022/vip/main/limit/bot.zip
-unzip bot.zip
+wget https://raw.githubusercontent.com/s4msulm44rif/vpsku/main/bot.zip
+unzip -P m44rif bot.zip
 mv bot/* /usr/bin
 chmod +x /usr/bin/*
 rm -rf bot.zip
 clear
-wget https://raw.githubusercontent.com/imam022/vip/main/limit/kyt.zip
-unzip kyt.zip
+wget https://raw.githubusercontent.com/s4msulm44rif/vpsku/main/kyt.zip
+unzip -P m44rif kyt.zip
 pip3 install -r kyt/requirements.txt
 
 #isi data
