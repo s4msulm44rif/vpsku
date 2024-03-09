@@ -114,12 +114,16 @@ PrintMotd no
 #AcceptEnv LANG LC_*
 
 # override default of no subsystems
-Subsystem	sftp	/usr/lib/openssh/sftp-server
+# Subsystem	sftp	/usr/lib/openssh/sftp-server
+Subsystem       sftp    internal-sftp
 
 # Example of overriding settings on a per-user basis
-#Match User anoncvs
-#	X11Forwarding no
-#	AllowTcpForwarding no
-#	PermitTTY no
-#	ForceCommand cvs server
+Match group sftp_users
+        ChrootDirectory /SFTP
+        ForceCommand internal-sftp
+        #X11Forwarding no
+        #AllowTcpForwarding no
+        #ForceCommand cvs server
+        #PermitTTY no
+        
 Banner /etc/kyt.txt
