@@ -38,25 +38,27 @@ Check_And_Add_Line(){
 }
 
 Install_BBR(){
-echo -e "\e[32;1m================================\e[0m"
-echo -e "\e[32;1mInstalling TCP BBR...\e[0m"
-if [ -n "$(lsmod | grep bbr)" ];then
-echo -e "\e[0;32mSuccesfully Installed TCP BBR.\e[0m"
-echo -e "\e[32;1m================================\e[0m"
-return 1
-fi
-echo -e "\e[0;32mStarting To Install BBR...\e[0m"
-modprobe tcp_bbr
-Add_To_New_Line "/etc/modules-load.d/modules.conf" "tcp_bbr"
-Add_To_New_Line "/etc/sysctl.conf" "net.core.default_qdisc = fq"
-Add_To_New_Line "/etc/sysctl.conf" "net.ipv4.tcp_congestion_control = bbr"
-sysctl -p
-if [ -n "$(sysctl net.ipv4.tcp_available_congestion_control | grep bbr)" ] && [ -n "$(sysctl net.ipv4.tcp_congestion_control | grep bbr)" ] && [ -n "$(lsmod | grep "tcp_bbr")" ];then
-	echo -e "\e[0;32mTCP BBR Install Success!\e[0m"
-else
-	echo -e "\e[1;31mFailed To Install BBR!\e[0m"
-fi
-echo -e "\e[32;1m================================\e[0m"
+    echo -e ""
+    if [ -n "$(lsmod | grep bbr)" ];then
+        echo -e "\e[0;32mSuccesfully Installed TCP BBR.\e[0m"
+        echo -e "\e[32;1m================================\e[0m"
+    return 1
+    fi
+
+    echo -e "\e[0;32mStarting To Install BBR...\e[0m"
+    modprobe tcp_bbr
+    Add_To_New_Line "/etc/modules-load.d/modules.conf" "tcp_bbr"
+    Add_To_New_Line "/etc/sysctl.conf" "net.core.default_qdisc = fq"
+    Add_To_New_Line "/etc/sysctl.conf" "net.ipv4.tcp_congestion_control = bbr"
+
+    sysctl -p
+
+    if [ -n "$(sysctl net.ipv4.tcp_available_congestion_control | grep bbr)" ] && [ -n "$(sysctl net.ipv4.tcp_congestion_control | grep bbr)" ] && [ -n "$(lsmod | grep "tcp_bbr")" ];then
+	    echo -e "\e[0;32mTCP BBR Install Success!\e[0m"
+    else
+	    echo -e "\e1;31mFailed To Install BBR!\e[0m"
+    fi
+    echo -e "\e[32;1m================================\e[0m"
 }
 
 Optimize_Parameters(){
@@ -167,8 +169,5 @@ echo -e "\e[32;1m================================\e[0m"
 Install_BBR
 Optimize_Parameters
 rm -f /root/bbr.sh >/dev/null 2>&1
-echo -e '\e[32;1m============================================================\e[0m'
-echo -e '\e[0;32m                  Installation Success!                     \e[0m'
-echo -e '\e[32;1m============================================================\e[0m'
 sleep 3
 #fi
