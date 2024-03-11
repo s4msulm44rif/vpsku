@@ -40,8 +40,7 @@ Check_And_Add_Line(){
 Install_BBR(){
     echo -e ""
     if [ -n "$(lsmod | grep bbr)" ];then
-        echo -e "\e[0;32mSuccesfully Installed TCP BBR.\e[0m"
-        echo -e "\e[32;1m================================\e[0m"
+        echo -e ""
     return 1
     fi
 
