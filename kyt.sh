@@ -30,8 +30,8 @@ echo -e "${grenbo}Tutorial Creat Bot and ID Telegram${NC}"
 echo -e "${grenbo}[*] Creat Bot and Token Bot : @BotFather${NC}"
 echo -e "${grenbo}[*] Info Id Telegram : m44rif@bot , perintah /info${NC}"
 echo -e ""
-read -e -p "[*] Input your Bot Token : " KEY
-read -e -p "[*] Input Your Id Telegram :" CHATID
+#read -e -p "[*] Input your Bot Token : " KEY
+#read -e -p "[*] Input Your Id Telegram :" CHATID
 echo -e BOT_TOKEN='"'$KEY'"' >> /usr/bin/kyt/var.txt
 echo -e ADMIN='"'$CHATID'"' >> /usr/bin/kyt/var.txt
 echo -e DOMAIN='"'$domain'"' >> /usr/bin/kyt/var.txt
