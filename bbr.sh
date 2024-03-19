@@ -1,8 +1,4 @@
 #!/bin/bash
-# Edition : Stable Edition V3.0
-# Auther  : Geo Project
-# (C) Copyright 2023
-# =========================================
 
 red='\e[1;31m'
 green='\e[0;32m'
