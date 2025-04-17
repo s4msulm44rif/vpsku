@@ -1,10 +1,11 @@
 
 Jika Anda tertarik dengan installer vpn ini, 
-silahkan Hubungi : https://t.me/m44rifx
+silahkan Hubungi : https://t.me/m44rifz
 
 fitur:
 - Support Debian 10/11/12
-- Support Ubuntu 18/20/22
+- Support Ubuntu 18/20/22/24
 - Support MultiPath
+- Support Wildcard
 - Support DynamicPath
 - Include Domain Auto Pointing to Cloudflare
